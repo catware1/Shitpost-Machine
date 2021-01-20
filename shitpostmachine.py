@@ -116,7 +116,7 @@ def genshitpost():
 	list_params.append(choice(list_randwords))
 	list_params.append("/" + choice(list_randwords) + "/" + choice(list_randwords))
 	list_params.append("/" + choice(list_randwords) + "/" + choice(list_randwords) + "/" + choice(list_randwords) + "." + choice(list_formats))
-	gentype = choice("randomwords,action,command".split(","))
+	gentype = choice("randomwords,action,command,image".split(","))
 	if gentype == "randomwords":
 		count = randint(1, 10)
 		res = ""
@@ -137,6 +137,9 @@ def genshitpost():
 			res += " >> " + choice(list_params)
 		if ch == 3:
 			pass
+	if gentype == "image":
+		img_id = randint(0, 999999)
+		res = f'<img id="{div_id}"></img><script>(async () => {document.getElementById("{div_id}").src = await fetchImage("{}")})()</script>'
 	if choice([True, False]):
 		res = filter(res)
 	return res
@@ -150,7 +153,17 @@ else:
 
 print(" >>> Создание кропотливого щитпоста... ")
 html = ""
-html += "<html><head><title>" + genshitpost() + "</title><style>" + ReadFF("style.txt") + "</style><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'></head><body><p>"
+html += """<html><head>
+<script>
+const fetchImage = async (keywords) => {
+  let res = (await fetch(`https://duckduckgo.com/?q=${keywords}&iax=images&ia=images&format=json&t=h_${Math.floor(Math.random() * Math.floor(100))}`)).json();
+  let result = '';
+  let i = 0;
+  while (!result) { result = (await res).RelatedTopics[i].Icon.URL; i++};
+  return `https://duckduckgo.com${result}`;
+}
+</script>
+<title>""" + genshitpost() + "</title><style>" + ReadFF("style.txt") + "</style><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'></head><body><p>"
 print(" >>> Создание контента... ")
 for x in range(randint(50, 250)):
 	ch = choice(["form", "marque", "tag", "tag", "tag", "tag"])
