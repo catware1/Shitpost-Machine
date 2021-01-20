@@ -108,6 +108,7 @@ def writefile(text, target):
 
 def genshitpost():
 	global list_flags, list_params, list_randwords, list_commands, list_people, list_actions, list_flags, list_formats, list_concate, list_additional
+	search_keywords = ['aye', 'gento', 'linex', 'smegma', 'sex', 'gay', 'snus', 'vkid', 'aue', 'semen', 'cum']
 	res = ""
 	list_flags.append("--" + choice(list_randwords))
 	list_flags.append("--" + choice(list_randwords) + '="' + choice(list_randwords) + '"')
@@ -117,12 +118,14 @@ def genshitpost():
 	list_params.append("/" + choice(list_randwords) + "/" + choice(list_randwords))
 	list_params.append("/" + choice(list_randwords) + "/" + choice(list_randwords) + "/" + choice(list_randwords) + "." + choice(list_formats))
 	gentype = choice("randomwords,action,command,image".split(","))
+	def randomwords(count):
+                res = ""
+                for x in range(count):
+                        res += choice(list_randwords) + " "
+                return str(choice(list_concate) * randint(1, 10))
+
 	if gentype == "randomwords":
-		count = randint(1, 10)
-		res = ""
-		for x in range(count):
-			res += choice(list_randwords) + " "
-		res += str(choice(list_concate) * randint(1, 10))
+		res += randomwords(randint(1, 10))
 
 	if gentype == "action":
 		pass
@@ -138,8 +141,8 @@ def genshitpost():
 		if ch == 3:
 			pass
 	if gentype == "image":
-		img_id = randint(0, 999999)
-		res = f'<img id="{div_id}"></img><script>(async () => {document.getElementById("{div_id}").src = await fetchImage("{}")})()</script>'
+		div_id = randint(0, 999999)
+		res = f'<img id="{div_id}"></img><script>(async () => ' + '{' + f'document.getElementById("{div_id}").src = await fetchImage("{choice(search_keywords)}")' + '})()</script>'
 	if choice([True, False]):
 		res = filter(res)
 	return res
@@ -152,8 +155,7 @@ else:
 	print(" >>> Папка " + SHITPLACE + " уже имеется.")
 
 print(" >>> Создание кропотливого щитпоста... ")
-html = ""
-html += """<html><head>
+html = '''<html><head>
 <script>
 const fetchImage = async (keywords) => {
   let res = (await fetch(`https://duckduckgo.com/?q=${keywords}&iax=images&ia=images&format=json&t=h_${Math.floor(Math.random() * Math.floor(100))}`)).json();
@@ -163,7 +165,9 @@ const fetchImage = async (keywords) => {
   return `https://duckduckgo.com${result}`;
 }
 </script>
-<title>""" + genshitpost() + "</title><style>" + ReadFF("style.txt") + "</style><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'></head><body><p>"
+<title>'''
+
+html += genshitpost() + "</title><style>" + ReadFF("style.txt") + "</style><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'></head><body><p>"
 print(" >>> Создание контента... ")
 for x in range(randint(50, 250)):
 	ch = choice(["form", "marque", "tag", "tag", "tag", "tag"])
