@@ -1,0 +1,82 @@
+img.trololo {
+    width: 30% !important;
+    height: 30% !important;
+  display: block !important;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+body {
+    font-family: serif;
+           
+  animation: bg 2s linear infinite !important;
+
+      background-image: linear-gradient(to bottom right, red,orange,yellow,green,blue,indigo,violet,red) ; 
+    background-size: 200% 200% !important;
+}
+@font-face {
+font-family: "lobSter";
+src: url("systemd.vtsoft.dev/3952.ttf");
+}
+
+@keyframes lol {
+ from {  transform: scale(0.5, 2) ;
+      }
+  to  {
+transform: scale(2, 0.5) ;}
+}
+
+@keyframes lol1 {
+     from {transform: scale(1, 0.3) ;
+  }to {
+            transform: scale(0.3, 1.6) ;
+  }
+}
+
+@keyframes lol2 {
+ from {
+      transform: scale(4, 1) ;
+  }
+   to {
+ transform: scale(0.9, 3) ;
+  }
+}
+
+@keyframes lol3 {
+           from {
+     transform: scale(1.5, 1.5) ;}
+        to {
+    transform: scale(1, 1) ;
+  }
+}
+
+@keyframes bg {
+	0% {
+		         background-position: 0% 0% ;
+filter: hue-rotate(0deg) ;
+	}
+	       50%
+  {    background-position: 100% 100% ;
+	       }
+	100% {
+		background-position: 0% 0% ;	filter: hue-rotate(360deg) ;
+	}
+}
+
+.anim0 {
+  animation: lol 2s linear infinite ;           animation-direction: alternate ;
+}
+
+    .anim1 {
+             animation: lol1 1s linear infinite ;       
+    animation-direction: alternate ;
+}
+
+.anim2 {animation: lol2 0.5s linear infinite;
+   animation-direction: alternate ;
+      width: 300px ;
+ height: 300px ;
+}
+
+.anim3 {
+        animation: lol3 0.7s linear infinite;animation-direction: alternate ;     }
