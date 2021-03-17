@@ -3,6 +3,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from random import choice, randint
 from os import listdir, mkdir
+from sys import argv
 
 from searchimages import ImgSearch
 
@@ -196,7 +197,10 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         html += "</p></body></html>"
         self.wfile.write(html.encode('utf-8'))
 
-
-httpd = HTTPServer(('localhost', 12345), SimpleHTTPRequestHandler)
-print('Открывай в браузере http://127.0.0.1:12345')
+if len(argv) >= 2:
+    PORT = argv[1]
+else:
+    PORT = 12345
+httpd = HTTPServer(('localhost', PORT), SimpleHTTPRequestHandler)
+print(f'Открывай в браузере http://127.0.0.1:{PORT}')
 httpd.serve_forever()
