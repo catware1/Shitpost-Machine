@@ -198,7 +198,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 PORT = getenv('PORT')
 if not PORT:
-    PORT = 12345
+    PORT = 80
 httpd = HTTPServer(('localhost', PORT), SimpleHTTPRequestHandler)
 print(f'Открывай в браузере http://127.0.0.1:{PORT}')
 httpd.serve_forever()
