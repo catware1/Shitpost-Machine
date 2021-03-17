@@ -1,1 +1,1 @@
-worker: python shitpostmachine.py 80
+web: python shitpostmachine.py
