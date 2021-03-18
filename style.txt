@@ -1,4 +1,4 @@
-img.trololo {
+img {
     width: 30% !important;
     height: 30% !important;
   display: block !important;
