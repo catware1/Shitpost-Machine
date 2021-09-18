@@ -9,18 +9,15 @@ from searchimages import ImgSearch
 imgSearch = ImgSearch()
 # from zalgo_text import zalgo
 
-search_keywords = "mama,termux,aye-aye,apt,shit,bitch,sperm,semen,windows,dick,gentoo,linux,gay,warning,adversiting,adversiting,i am,C plus plus".split(
-    ",")
-list_randwords = ",мама,термукс,апт,инсталл,хуйня,челнозовый,сук,сперма,гандон,виндоуз,дрист,глист,белёс,кал,уёбок,челнок,блять,ебать,залупа,гей,биба,бибуля,бабуля,быдло,внимание,я,нано,С++".split(
-    ",")
+search_keywords = "бомбандировка, военный самолет, боеголовки, воронеж бомбить, флаг воронежа, nuclear explosion, bombardment".split(", ")
+list_randwords = "мать, говно, воронеж, бомбить, ебал, сука, пиздец, ахахахах, улелелел, АУЕАУЕАУЕ, ауеауеауе, гандон, веды, ведический, база, базированный, БПАЗА!, Б А З А, чзх, ведает, славяноарийство, славвяно арий, либерасты, евреи, семясвечник, пятница, шаббат шалом, бомбить воронеж, воронеж, бомбить, ракеты, удар".split(", ")
 list_concate = "йо,ви,ах,ауе,ыыыы".split(",")
 list_additional = "через,с помощью,в,как".split(",")
-list_people = "пират,мама,я,ты,лох,бомж".split(",")
-list_actions = "установил(-a),удалил(-а),стёр(-ла),скачал(-а)".split(",")
-list_commands = "apt,ping,mutter,dnf,sudo,nano,vim,pacman,xbps-install,mount,umount,systemctl,useradd,firefox,sddm,rm,cd,suda,doas,anal,vi,elinks,python3,java,ruby,nginx,rc-update,rc-service,sv,yum,apk,nmap,cp,ln,echo,tee,cat,tac".split(
-    ",")
-list_flags = "--install --fix-missing --aye -rf --verbose --update --deep --add --remove --unmerge   ".split(" ")
-list_params = "install remove purge delete".split(" ")
+list_people = "президент, фриспик, евреи, пидорасы, геи, коммунисты, либерасты, базисты".split(",")
+list_actions = "разбомбил(-a),стёр(-а),разъебал(-ла),насрал(-а)".split(",")
+list_commands = "apt,ping,mutter,dnf,sudo,nano,vim,pacman,xbps-install,mount,umount,systemctl,useradd,firefox,sddm,rm,cd,suda,doas,anal,vi,elinks,python3,java,ruby,nginx,rc-update,rc-service,sv,yum,apk,nmap,cp,ln,echo,tee,cat,tac".split(",")
+list_flags = "--install --fix-missing --aye -rf --verbose --update --deep_dark_fanstasy --add --remove --unmerge   ".split(" ")
+list_params = "install ЧЕСНОК purge delete".split(" ")
 list_formats = "txt rtf conf py rb html css js deb rpm tar.gz tar tar.bz2 mp3 mp4 avi png jpg bmp exe elf".split(" ")
 tags = "h1,h2,h3,h4,h5,h6,strong,i,strike,pre".split(",")
 letters = list("qwertyuiopasdfghjklzxcvbnm")
