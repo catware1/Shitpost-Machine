@@ -1,0 +1,142 @@
+img {
+	max-width: 100vw !important;
+}
+
+body {
+	font-family: serif;
+    background-size: 200% 200% !important;
+}
+
+@font-face {
+	font-family: "lobSter";
+	src: url("https://systemd.vtsoft.dev/3952.ttf");
+}
+
+@keyframes lol {
+	from {
+		transform: scale(0.5, 2);
+	}
+	to {
+		transform: scale(2, 0.5);
+	}
+}
+
+@keyframes lol1 {
+	from {
+		transform: scale(1, 0.3);
+	}
+	to {
+		transform: scale(0.3, 1.6);
+	}
+}
+
+@keyframes lol2 {
+	from {
+		transform: scale(4, 1);
+	}
+	to {
+		transform: scale(0.9, 3);
+	}
+}
+
+@keyframes lol3 {
+	from {
+		transform: scale(1.5, 1.5);
+	}
+	to {
+		transform: scale(1, 1);
+	}
+}
+
+@keyframes bg {
+	0% {
+		background-position: 0% 0%;
+		filter: hue-rotate(0deg);
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+	100% {
+		background-position: 0% 0%;
+		filter: hue-rotate(360deg);
+	}
+}
+
+.anim0 {
+	animation: lol 2s linear infinite;
+	animation-direction: alternate;
+}
+
+.anim1 {
+	animation: lol1 1s linear infinite;
+	animation-direction: alternate;
+}
+
+.anim2 {
+	animation: lol2 0.5s linear infinite;
+	animation-direction: alternate;
+	width: 300px;
+	height: 300px;
+}
+
+.anim3 {
+	animation: lol3 0.7s linear infinite;
+	animation-direction: alternate;
+}
+
+#button,
+#dno,
+#one,
+#two {
+    z-index: 228;
+}
+
+#button,
+#dno {
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+}
+
+#one,
+#two {
+	margin-left: auto;
+	margin-right: auto;
+	width: 20%;
+}
+
+#button {
+	z-index: 229;
+}
+
+#dno {
+    margin-top: -10.7vh;
+    z-index: 228;
+}
+
+#includedContent {
+	width: 100%;
+	height: auto;
+}
+
+#white {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 228;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pizdec {
+    animation: bg 2s linear infinite !important;
+    background-image: linear-gradient(to bottom right, red,orange,yellow,green,blue,indigo,violet,red);
+    background-size: 200% 200% !important;
+}

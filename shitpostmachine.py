@@ -1,26 +1,32 @@
 # Catware Shitpost Machine
 #
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 from random import choice, randint
-from os import listdir, mkdir, getenv
+from os import getenv
+from string import ascii_letters as letters
 
 from searchimages import ImgSearch
 
 imgSearch = ImgSearch()
-# from zalgo_text import zalgo
 
-search_keywords = "бомбандировка, военный самолет, боеголовки, воронеж бомбить, флаг воронежа, nuclear explosion, bombardment".split(", ")
-list_randwords = "мать, говно, воронеж, бомбить, ебал, сука, пиздец, ахахахах, улелелел, АУЕАУЕАУЕ, ауеауеауе, гандон, веды, ведический, база, базированный, БПАЗА!, Б А З А, чзх, ведает, славяноарийство, славвяно арий, либерасты, евреи, семясвечник, пятница, шаббат шалом, бомбить воронеж, воронеж, бомбить, ракеты, удар".split(", ")
+search_keywords = "бомбандировка, военный самолет, боеголовки, воронеж бомбить, флаг воронежа, nuclear explosion," \
+                  " bombardment".split(", ")
+list_randwords = "мать, говно, воронеж, бомбить, ебал, сука, пиздец, ахахахах, улелелел, АУЕАУЕАУЕ, ауеауеауе, гандон," \
+                 " веды, ведический, база, базированный, БПАЗА!, Б А З А, чзх, ведает, славяноарийство, славвяно арий," \
+                 " либерасты, евреи, семясвечник, пятница, шаббат шалом, бомбить воронеж, воронеж, бомбить, ракеты," \
+                 " удар".split( ", ")
 list_concate = "йо,ви,ах,ауе,ыыыы".split(",")
 list_additional = "через,с помощью,в,как".split(",")
 list_people = "президент, фриспик, евреи, пидорасы, геи, коммунисты, либерасты, базисты".split(",")
 list_actions = "разбомбил(-a),стёр(-а),разъебал(-ла),насрал(-а)".split(",")
-list_commands = "apt,ping,mutter,dnf,sudo,nano,vim,pacman,xbps-install,mount,umount,systemctl,useradd,firefox,sddm,rm,cd,suda,doas,anal,vi,elinks,python3,java,ruby,nginx,rc-update,rc-service,sv,yum,apk,nmap,cp,ln,echo,tee,cat,tac".split(",")
-list_flags = "--install --fix-missing --aye -rf --verbose --update --deep_dark_fanstasy --add --remove --unmerge   ".split(" ")
+list_commands = "apt,ping,mutter,dnf,sudo,nano,vim,pacman,xbps-install,mount,umount,systemctl,useradd,firefox," \
+                "sddm,rm,cd,suda,doas,anal,vi,elinks,python3,java,ruby,nginx,rc-update,rc-service,sv,yum,apk,nmap," \
+                "cp,ln,echo,tee,cat,tac".split(",")
+list_flags = "--install --fix-missing --aye -rf --verbose --update --deep_dark_fanstasy --add --remove --unmerge"\
+    .split(" ")
 list_params = "install ЧЕСНОК purge delete".split(" ")
 list_formats = "txt rtf conf py rb html css js deb rpm tar.gz tar tar.bz2 mp3 mp4 avi png jpg bmp exe elf".split(" ")
 tags = "h1,h2,h3,h4,h5,h6,strong,i,strike,pre".split(",")
-letters = list("qwertyuiopasdfghjklzxcvbnm")
 
 typical_form = """ <form>
   <p><b>{}</b></p>
@@ -88,8 +94,6 @@ def genstyle():
     if choice([True, False]):
         aye += "right: " + str(randint(1, 90)) + "%;"
         aye += "bottom: " + str(randint(1, 90)) + "%;"
-    # aye += "width: " + str(randint(100, 150)) + "%;"
-    # aye += "heitht: " + str(randint(10, 50)) + "%;"
     aye += "'"
     return aye
 
@@ -102,16 +106,6 @@ def gencolorz():
         return ",".join(lst)
 
 
-def ReadFF(target):
-    try:
-        file = open(target, "r", encoding="utf-8")
-        contents = file.read()
-        file.close()
-    except:
-        contents = None
-    return contents
-
-
 def writefile(text, target):
     file = open(target, "w", encoding="utf-8")
     file.write(text)
@@ -119,8 +113,8 @@ def writefile(text, target):
 
 
 def genshitpost():
-    global list_flags, list_params, list_randwords, list_commands, list_people, list_actions, list_flags, list_formats, list_concate, list_additional
-    # search_keywords.append(list_randwords)
+    global list_flags, list_params, list_randwords, list_commands, list_people, list_actions, list_flags,\
+        list_formats, list_concate, list_additional
     res = ""
     list_flags.append("--" + choice(list_randwords))
     list_flags.append("--" + choice(list_randwords) + '="' + choice(list_randwords) + '"')
@@ -144,7 +138,6 @@ def genshitpost():
 
     if gentype == "action":
         pass
-        # print("{} {} {} {} {}".format(choice(list_people), choice(list_actions), choice(list_randwords), choice(list_additional), choice(list_randwords) + "a"))
     if gentype == "command":
         res = ""
         ch = choice([1, 2, 3])
@@ -160,40 +153,54 @@ def genshitpost():
     return res
 
 
-class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        SimpleHTTPRequestHandler.__init__(self, *args, **kwargs, directory='public')
+
     def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-        html = '''<html><head>
-               <meta charset="utf-8">
-               <title>'''
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            html = '''<html><head>
+                   <meta charset="utf-8">
+                   <title>'''
 
-        html += genshitpost() + "</title><style>" + ReadFF(
-            "style.txt") + "</style><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'></head><body><p>"
+            html += genshitpost() + "</title><link rel='stylesheet' href='/styles.css'><link rel='stylesheet' " \
+                                    "href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>" \
+                                    "</head><body><div id='white'><div id='button'><img src='button.png' " \
+                                    "id='one'></div><div id='dno'><img src='dno.png' id='two'>" \
+                                    "</div></div><script src='main.js'></script><p>"
 
-        for x in range(randint(50, 550)):
-            ch = choice(["form", "marque", "tag", "tag", "tag", "tag", "image", "image", "image", "image"])
-            if ch == "tag":
-                tag = choice(tags)
-                module = "<" + tag + " " + genstyle() + " class='{}'>".format(choice(
-                    "animated shake infinite,trololo anim0,animated bounce infinite,animeted fadeIn infinite,animated jello infinite,animated flip infinite".split(
-                        ","))) + genshitpost() + "</" + tag + ">"
-                if choice([True, False]):
-                    module = "<font color='" + choice(
-                        "red,black,yellow,brown,blue,green,gray".split(",")) + "'>" + module + "</font>"
-                html += module
-            if ch == "form":
-                html += typical_form.format(genshitpost(), genshitpost(), genshitpost(), genshitpost(), genshitpost())
-            if ch == "marque":
-                html += createmarque()
-            if ch == "image":
-                div_id = randint(0, 999999)
-                html += f'<img id="{div_id}"></img><script>(async () => ' + '{' + f'document.getElementById("{div_id}").src = "{choice(imgSearch.fetch(choice(search_keywords)))}"' + '})()</script>'
-        html += "</p></body></html>"
-        self.wfile.write(html.encode('utf-8'))
+            for x in range(randint(50, 550)):
+                ch = choice(["form", "marque", "tag", "tag", "tag", "tag", "image", "image", "image", "image"])
+                if ch == "tag":
+                    tag = choice(tags)
+                    module = "<" + tag + " " + genstyle() + " class='{}'>".format(choice(
+                        "animated shake infinite,trololo anim0,animated bounce infinite,animeted fadeIn "
+                        "infinite,animated jello infinite,animated flip infinite".split(
+                            ","))) + genshitpost() + "</" + tag + ">"
+                    if choice([True, False]):
+                        module = "<font color='" + choice(
+                            "red,black,yellow,brown,blue,green,gray".split(",")) + "'>" + module + "</font>"
+                    html += module
+                if ch == "form":
+                    html += typical_form.format(genshitpost(), genshitpost(), genshitpost(), genshitpost(),
+                                                genshitpost())
+                if ch == "marque":
+                    html += createmarque()
+                if ch == "image":
+                    div_id = randint(0, 999999)
+                    html += f'<img id="{div_id}"></img><script>(async () => ' + '{'\
+                            + f'document.getElementById("{div_id}").src = ' \
+                              f'"{choice(imgSearch.fetch(choice(search_keywords)))}"' + '})()</script>'
+            html += "</p></body></html>"
+            self.wfile.write(html.encode('utf-8'))
+        else:
+            SimpleHTTPRequestHandler.do_GET(self)
+
 
 PORT = int(getenv('PORT') or 12345)
-httpd = HTTPServer(('0.0.0.0', PORT), SimpleHTTPRequestHandler)
+httpd = HTTPServer(('0.0.0.0', PORT), Handler)
 print(f'Открывай в браузере http://127.0.0.1:{PORT}')
 httpd.serve_forever()
