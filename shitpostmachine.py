@@ -168,8 +168,8 @@ class Handler(SimpleHTTPRequestHandler):
 
             html += genshitpost() + "</title><link rel='stylesheet' href='/styles.css'><link rel='stylesheet' " \
                                     "href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'>" \
-                                    "</head><body><div id='white'><div id='button'><img src='button.png' " \
-                                    "id='one'></div><div id='dno'><img src='dno.png' id='two'>" \
+                                    "</head><body><div id='white'><div id='button'><img src='button.webp' " \
+                                    "id='one'></div><div id='dno'><img src='dno.webp' id='two'>" \
                                     "</div></div><script src='main.js'></script><p>"
 
             for x in range(randint(50, 550)):
@@ -191,7 +191,7 @@ class Handler(SimpleHTTPRequestHandler):
                     html += createmarque()
                 if ch == "image":
                     div_id = randint(0, 999999)
-                    html += f'<img id="{div_id}"></img><script>(async () => ' + '{'\
+                    html += f'<img class="anim{randint(0, 3)}" id="{div_id}"></img><script>(async () => ' + '{'\
                             + f'document.getElementById("{div_id}").src = ' \
                               f'"{choice(imgSearch.fetch(choice(search_keywords)))}"' + '})()</script>'
             html += "</p></body></html>"

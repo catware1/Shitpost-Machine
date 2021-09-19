@@ -5,6 +5,7 @@ img {
 body {
 	font-family: serif;
     background-size: 200% 200% !important;
+    overflow: hidden;
 }
 
 @font-face {
@@ -133,10 +134,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0;
 }
 
 .pizdec {
     animation: bg 2s linear infinite !important;
     background-image: linear-gradient(to bottom right, red,orange,yellow,green,blue,indigo,violet,red);
     background-size: 200% 200% !important;
+    overflow: auto;
 }

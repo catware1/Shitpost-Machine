@@ -7,8 +7,7 @@ function play() {
 
 async function handler() {
     const but = document.getElementById('button');
-    const dno = document.getElementById('dno');
-    dno.style.marginTop = "-12.7vh";
+    but.style.marginBottom = "-20px";
     play();
     await new Promise((resolve) => setTimeout(resolve, 500));
     document.getElementById('white').style.display = 'none';
